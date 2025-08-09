@@ -7,11 +7,23 @@ use App\Models\Category;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Routing\Controllers\HasMiddleware;
+use Illuminate\Routing\Controllers\Middleware;
 
 use Illuminate\Support\Facades\Validator;
 
-class BlogpostController extends Controller
+class BlogpostController extends Controller implements HasMiddleware
 {
+    public static function middleware(): array
+    {
+        return [
+            new Middleware('permission:View Blog List', only: ['index']),
+            new Middleware('permission:Create Blogs', only: ['create']),
+            new Middleware('permission:Edit Blogs', only: ['edit']),
+            new Middleware('permission:Delete Blogs', only: ['destroy']),
+        ];
+    }
+
     public function index(Request $request)
     {
         // $blogposts = Blogpost::with('category')->get();

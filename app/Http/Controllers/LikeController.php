@@ -4,9 +4,20 @@ namespace App\Http\Controllers;
 
 use App\Models\Like;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Controllers\HasMiddleware;
+use Illuminate\Routing\Controllers\Middleware;
 
-class LikeController extends Controller
+class LikeController extends Controller implements Hasmiddleware
 {
+    public static function middleware(): array
+    {
+        return [
+            new Middleware('permission:view Likes', only: ['index']),
+            
+            new Middleware('permission:delete Likes', only: ['delete']),
+            
+        ];
+    }
     public function index(){
         $likes= Like::with('post')->latest()->get();
         return view('likes.index', compact('likes'));

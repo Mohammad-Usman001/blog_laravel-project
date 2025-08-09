@@ -13,7 +13,7 @@
 
                             <div class="page-title-right">
                                 <ol class="breadcrumb m-0">
-                                    <li class="breadcrumb-item"><a href="{{ 'dashboard' }}">Dashboards</a></li>
+                                    <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Dashboards</a></li>
                                     <li class="breadcrumb-item active">Category List</li>
                                 </ol>
                             </div>
@@ -41,10 +41,10 @@
                                         </ul>
                                     </div>
                                 @endif
-
-                                <a href="{{ route('categories.create') }}" class="btn btn-primary mb-3 ms-auto">Create
-                                    Category</a>
-
+                                @can('create Categories')
+                                    <a href="{{ route('categories.create') }}" class="btn btn-primary mb-3 ms-auto">Create
+                                        Category</a>
+                                @endcan
                                 <table class="table table-bordered">
                                     <tr>
                                         <th>Category Name</th>
@@ -61,10 +61,13 @@
                                             <td>{{ $category->name }}</td>
                                             <td>{{ \Carbon\Carbon::parse($category->created_at)->format('d M, Y') }}</td>
                                             <td>
+                                                @can('edit Categories')
                                                 <form action="{{ route('categories.edit', $category->id) }}" method="GET"
                                                     style="display:inline-block;">
                                                     <button type="submit" class="btn btn-primary">Edit</button>
                                                 </form>
+                                                @endcan
+                                                @can('delete Categories')
                                                 <form action="{{ route('categories.destroy', $category->id) }}"
                                                     method="POST" style="display:inline-block; margin-right: 5px;"
                                                     class="delete-permission-form">
@@ -73,6 +76,7 @@
                                                     <button type="submit" class="btn btn-danger">Delete</button>
 
                                                 </form>
+                                                @endcan
                                             </td>
                                         </tr>
                                     @endforeach

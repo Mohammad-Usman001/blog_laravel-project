@@ -38,4 +38,5 @@ class BlogPost extends Model
     {
         return $this->hasMany(Like::class, 'post_id');
     }
+    
 }

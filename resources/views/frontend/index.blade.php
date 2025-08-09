@@ -1,138 +1,188 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <title>@yield('title', 'Blog Project')</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
-  <style>
-    body {
-      background: #f9f9f9;
-      font-family: 'Segoe UI', sans-serif;
-    }
+    <meta charset="UTF-8">
+    <title>@yield('title', 'Blog Project')</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+    <style>
+        body {
+            background: #f9f9f9;
+            font-family: 'Segoe UI', sans-serif;
+        }
 
-    .navbar-brand {
-      font-weight: bold;
-      color: #0d6efd !important;
-    }
+        .navbar-brand {
+            font-weight: bold;
+            color: #0d6efd !important;
+        }
 
-    .hero {
-      background: linear-gradient(to right, #007bff, #00c6ff);
-      color: white;
-      padding: 100px 20px;
-      text-align: center;
-    }
+        .hero {
+            background: linear-gradient(to right, #007bff, #00c6ff);
+            color: white;
+            padding: 100px 20px;
+            text-align: center;
+        }
 
-    .hero h1 {
-      font-size: 3rem;
-      font-weight: 700;
-    }
+        .hero h1 {
+            font-size: 3rem;
+            font-weight: 700;
+        }
 
-    .hero p {
-      font-size: 1.25rem;
-    }
+        .hero p {
+            font-size: 1.25rem;
+        }
 
-    .card {
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
+        .card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
 
-    .card:hover {
-      transform: translateY(-10px);
-      box-shadow: 0 10px 20px rgba(0,0,0,0.2);
-    }
-    .card-img, .card-img-bottom, .card-img-top {
-    width: 100%;
-    height: 300px;
-    padding: 10px;
-}
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
 
-    .footer {
-      background-color: #212529;
-      color: #ccc;
-      padding: 30px 0;
-      text-align: center;
-    }
+        .card-img,
+        .card-img-bottom,
+        .card-img-top {
+            width: 100%;
+            height: 300px;
+            padding: 10px;
+        }
 
-    .footer a {
-      color: #ccc;
-      text-decoration: none;
-    }
+        .footer {
+            background-color: #212529;
+            color: #ccc;
+            padding: 30px 0;
+            text-align: center;
+        }
 
-    .footer a:hover {
-      color: white;
-    }
-  </style>
+        .footer a {
+            color: #ccc;
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            color: white;
+        }
+    </style>
 </head>
+
 <body>
 
-  <!-- Navbar -->
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm sticky-top">
-    <div class="container">
-      <a class="navbar-brand" href="{{ route('frontend.index') }}">My Blog</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarContent">
-        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-          <li class="nav-item"><a class="nav-link" href="{{ route('frontend.index') }}">Home</a></li>
-          
-          <li class="nav-item"><a class="nav-link" href="{{ route('login') }}">Login</a></li>
-        </ul>
-      </div>
-    </div>
-  </nav>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="{{ route('frontend.index') }}">My Blog</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarContent">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                    <li class="nav-item"><a class="nav-link" href="{{ route('frontend.index') }}">Home</a></li>
 
-  <!-- Hero Section -->
-  <section class="hero" data-aos="fade-up">
-    <div class="container">
-      <h1>Welcome to Our Blog</h1>
-      <p>Explore our latest insights, ideas, and stories curated just for you.</p>
-    </div>
-  </section>
-
-  <!-- Blog Grid -->
-  <div class="container py-5">
-    <h2 class="text-center mb-5" data-aos="fade-right">Latest Blogs</h2>
-    <div class="row g-4">
-      @foreach ($blogposts as $blog)
-      <div class="col-md-4" data-aos="zoom-in">
-        <div class="card h-100">
-          @if($blog->image)
-            <img src="{{asset('storage/' . $blog->image)}}" class="card-img-top" alt="Blog Image">
-          @else
-            <div class="bg-light text-center py-5">No Image Uploaded</div>
-          @endif
-          <div class="card-body">
-            <span class="badge bg-info text-dark mb-2">{{ $blog->category->name ?? 'Uncategorized' }}</span>
-            <h5 class="card-title text-primary">{{ $blog->title }}</h5>
-            <p class="card-text">{{ $blog->short_description }}</p>
-          </div>
-          <div class="card-footer bg-white">
-            <small class="text-muted">{{ $blog->created_at->format('d M Y') }}</small><br>
-            <a href="{{ route('frontend.show', $blog->slug) }}" class="btn btn-outline-primary mt-2">Read More →</a>
-          </div>
+                    <li class="nav-item"><a class="nav-link" href="{{ route('login') }}">Admin Login</a></li>
+                </ul>
+            </div>
         </div>
-      </div>
-      @endforeach
-    </div>
-  </div>
+    </nav>
 
-  <!-- Footer -->
-  <footer class="footer">
-    <div class="container">
-      <p>Designed & Developed by <strong>Mohammad Usman</strong></p>
-      <p>&copy; {{ date('Y') }} My Blog. All rights reserved.</p>
-    </div>
-  </footer>
+    <!-- Hero Section -->
+    <section class="hero" data-aos="fade-up">
+        <div class="container">
+            <h1>Welcome to Our Blog</h1>
+            <p>Explore our latest insights, ideas, and stories curated just for you.</p>
+        </div>
+    </section>
 
-  <!-- Scripts -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-  <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
-  <script>
-    AOS.init({
-      duration: 1000,
-      once: true
-    });
-  </script>
+    <!-- Blog Grid -->
+    <div class="container py-5">
+        <h2 class="text-center mb-5" data-aos="fade-right">
+            @isset($category)
+                Blogs in {{ $category->name }}
+            @else
+                Latest Blogs
+            @endisset
+        </h2>
+
+        <div class="row g-4">
+            <!-- Blog Posts -->
+            <div class="col-lg-8">
+                <div class="row g-4">
+                    @foreach ($blogposts as $blog)
+                        <div class="col-md-6" data-aos="zoom-in">
+                            <div class="card h-100">
+                                @if ($blog->image)
+                                    <img src="{{ asset('storage/' . $blog->image) }}" class="card-img-top"
+                                        alt="Blog Image">
+                                @else
+                                    <div class="bg-light text-center py-5">No Image Uploaded</div>
+                                @endif
+                                <div class="card-body">
+                                    <span class="badge bg-info text-dark mb-2">
+                                        {{ $blog->category->name ?? 'Uncategorized' }}
+                                    </span>
+                                    <h5 class="card-title text-primary">{{ $blog->title }}</h5>
+                                    <p class="card-text">{{ $blog->short_description }}</p>
+                                </div>
+                                <div class="card-footer bg-white">
+                                    <small class="text-muted">{{ $blog->created_at->format('d M Y') }}</small><br>
+                                    <a href="{{ route('frontend.show', $blog->slug) }}"
+                                        class="btn btn-outline-primary mt-2">
+                                        Read More →
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
+            </div>
+
+            <!-- Categories Sidebar -->
+            <div class="col-lg-4">
+                <div class="card border-0 shadow-lg rounded-4" data-aos="fade-left" data-aos-duration="800">
+                    <div class="card-header bg-gradient-primary text-dark rounded-top-4 shadow-sm py-3 px-4">
+                        <h5 class="mb-0 fw-semibold">📚 Blog Categories</h5>
+                    </div>
+
+                    <ul class="list-group list-group-flush rounded-bottom-4">
+                        @foreach ($categories as $category)
+                            <li
+                                class="list-group-item px-4 py-3 category-item d-flex justify-content-between align-items-center">
+                                <a href="{{ route('frontend.category', $category->id) }}"
+                                    class="text-decoration-none text-dark fw-medium hover-highlight hover-blue">
+                                    {{ $category->name }}
+                                </a>
+                                <span class="badge bg-primary-subtle text-primary fw-semibold px-2 py-1 rounded-pill">
+                                    {{ $category->blogs->count() }}
+                                </span>
+                            </li>
+                        @endforeach
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>Designed & Developed by <strong>Mohammad Usman</strong></p>
+            <p>&copy; {{ date('Y') }} My Blog. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            duration: 1000,
+            once: true
+        });
+    </script>
 </body>
+
 </html>

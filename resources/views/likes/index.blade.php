@@ -13,7 +13,7 @@
 
                             <div class="page-title-right">
                                 <ol class="breadcrumb m-0">
-                                    <li class="breadcrumb-item"><a href="{{ 'dashboard' }}">Dashboards</a></li>
+                                    <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Dashboards</a></li>
                                     <li class="breadcrumb-item active">Like List</li>
                                 </ol>
                             </div>
@@ -64,7 +64,7 @@
                                             <td>{{ $like->created_at->format('d-m-Y') }}</td>
 
                                             <td>
-                                                
+                                                @can('delete Likes')
                                                 <form action="{{ route('like.destroy', $like->id) }}"
                                                     method="POST" style="display:inline;">
                                                     @csrf
@@ -72,6 +72,7 @@
                                                     <button type="submit" class="btn btn-danger delete-comment"
                                                         onclick="return confirm('Delete this comment?')">Delete</button>
                                                 </form>
+                                                @endcan
                                             </td>
                                         </tr>
                                     @endforeach

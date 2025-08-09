@@ -13,7 +13,7 @@
 
                             <div class="page-title-right">
                                 <ol class="breadcrumb m-0">
-                                    <li class="breadcrumb-item"><a href="{{ 'dashboard' }}">Dashboards</a></li>
+                                    <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Dashboards</a></li>
                                     <li class="breadcrumb-item active">Blog List</li>
                                 </ol>
                             </div>
@@ -26,10 +26,9 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-body">
-                                
-                                <input type="text" id="search"
-                                    class="form-control mb-3" placeholder="Search blog title or category or date & month..."
-                                    style="width:400px ">
+
+                                <input type="text" id="search" class="form-control mb-3"
+                                    placeholder="Search blog title or category or date & month..." style="width:400px ">
                                 {{-- <div id="blog-table">
                                     @include('Blogpost.partials.table')
                                 </div> --}}
@@ -48,9 +47,10 @@
                                         </ul>
                                     </div>
                                 @endif
-
-                                <a href="{{ route('blogs.create') }}" class="btn btn-primary mb-3 ms-auto">Create
-                                    Blog</a>
+                                @can('Create Blogs')
+                                    <a href="{{ route('blogs.create') }}" class="btn btn-primary mb-3 ms-auto">Create
+                                        Blog</a>
+                                @endcan
                                 <div id="blog-table">
                                     @include('Blogpost.partials.table')
                                 </div>

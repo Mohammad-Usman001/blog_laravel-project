@@ -34,7 +34,7 @@
                             <div class="card-body">
                                 <div class="avatar-sm float-end">
                                     <div class="avatar-title bg-primary-subtle text-primary fs-3xl rounded">
-                                        <i class="ph ph-briefcase"></i>
+                                        <i class="ph ph-file-text"></i>
                                     </div>
                                 </div>
                                 <h4><span class="counter-value" data-target="{{($BlogpostCount)}}">0</span></h4>
@@ -52,7 +52,7 @@
                             <div class="card-body">
                                 <div class="avatar-sm float-end">
                                     <div class="avatar-title bg-secondary-subtle text-secondary fs-3xl rounded">
-                                        <i class="ph ph-wallet"></i>
+                                        	<i class="ph ph-folders"></i>
                                     </div>
                                 </div>
                                 <h4><span class="counter-value" data-target="{{($categoryCount)}}">0</span></h4>
@@ -69,17 +69,17 @@
                         <div class="card overflow-hidden">
                             <div class="card-body">
                                 <div class="avatar-sm float-end">
-                                    <div class="avatar-title bg-danger-subtle text-danger fs-3xl rounded">
-                                        <i class="bi bi-broadcast"></i>
+                                    <div class="avatar-title bg-success-subtle text-success fs-3xl rounded">
+                                        <i class="ph ph-chat-circle"></i>
                                     </div>
                                 </div>
                                 <h4><span class="counter-value" data-target="{{($commentCount)}}"></span></h4>
                                 <p class="text-muted mb-4">Total Comment</p>
                                 
                             </div>
-                            <div class="progress progress-sm rounded-0" role="progressbar" aria-valuenow="18"
+                            <div class="progress progress-sm rounded-0" role="progressbar" aria-valuenow="50"
                                 aria-valuemin="0" aria-valuemax="100">
-                                <div class="progress-bar bg-danger" style="width: 18%"></div>
+                                <div class="progress-bar bg-success" style="width: 50%"></div>
                             </div>
                         </div>
                     </div><!--end col-->
@@ -88,16 +88,34 @@
                             <div class="card-body">
                                 <div class="avatar-sm float-end">
                                     <div class="avatar-title bg-danger-subtle text-danger fs-3xl rounded">
-                                        <i class="bi bi-broadcast"></i>
+                                        <i class="ph ph-calendar-plus"></i>
                                     </div>
                                 </div>
                                 <h4><span class="counter-value" data-target="{{($blogPostCountToday)}}"></span></h4>
                                 <p class="text-muted mb-4">Today Blog Post</p>
                                 
                             </div>
-                            <div class="progress progress-sm rounded-0" role="progressbar" aria-valuenow="18"
+                            <div class="progress progress-sm rounded-0" role="progressbar" aria-valuenow="60"
                                 aria-valuemin="0" aria-valuemax="100">
-                                <div class="progress-bar bg-danger" style="width: 18%"></div>
+                                <div class="progress-bar bg-danger" style="width: 60%"></div>
+                            </div>
+                        </div>
+                    </div><!--end col-->
+                    <div class="col-xxl col-sm-6">
+                        <div class="card overflow-hidden">
+                            <div class="card-body">
+                                <div class="avatar-sm float-end">
+                                    <div class="avatar-title bg-warning-subtle text-warning fs-3xl rounded">
+                                        	<i class="ph ph-clock-afternoon"></i>
+                                    </div>
+                                </div>
+                                <h4><span class="counter-value" data-target="{{($pendingCommentCount)}}"></span></h4>
+                                <p class="text-muted mb-4">Pending Comments</p>
+                                
+                            </div>
+                            <div class="progress progress-sm rounded-0" role="progressbar" aria-valuenow="70"
+                                aria-valuemin="0" aria-valuemax="100">
+                                <div class="progress-bar bg-warning" style="width: 70%"></div>
                             </div>
                         </div>
                     </div><!--end col-->

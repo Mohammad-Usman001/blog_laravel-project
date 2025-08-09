@@ -11,7 +11,7 @@
                             <h4 class="mb-sm-0">Comment List</h4>
                             <div class="page-title-right">
                                 <ol class="breadcrumb m-0">
-                                    <li class="breadcrumb-item"><a href="{{ url('dashboard') }}">Dashboard</a></li>
+                                    <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Dashboard</a></li>
                                     <li class="breadcrumb-item active">Comment List</li>
                                 </ol>
                             </div>
@@ -84,9 +84,10 @@
                                                                 @csrf
                                                             </form>
                                                         @endif
-
+                                                            @can('Delete Comments')
                                                         <button type="button" class="btn btn-danger btn-sm"
                                                             onclick="confirmDelete('delete-form-{{ $comment->id }}')">Delete</button>
+                                                            @endcan
                                                         <form id="delete-form-{{ $comment->id }}"
                                                             action="{{ route('admin.comments.destroy', $comment->id) }}"
                                                             method="POST" style="display:none;">

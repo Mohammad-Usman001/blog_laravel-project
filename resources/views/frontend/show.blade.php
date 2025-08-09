@@ -40,14 +40,17 @@
             font-size: 3rem;
             text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.6);
         }
-.blogpage-img{
-    width: 750px;
-    height: 350px;
-}
-.blogpage-img img{
-    width: 100%;
-    height: 100%;
-}
+
+        .blogpage-img {
+            width: 750px;
+            height: 350px;
+        }
+
+        .blogpage-img img {
+            width: 100%;
+            height: 100%;
+        }
+
         .like-btn {
             background-color: #f3f4f6;
             border: none;
@@ -143,15 +146,15 @@
         <div class="row">
             <!-- Blog -->
             <div class="col-lg-8" data-aos="fade-right">
-                
-                <h2>{{ $blogpost->title}}</h2>
+
+                <h2>{{ $blogpost->title }}</h2>
                 <span class="badge bg-info mb-3">{{ $blogpost->category->name ?? 'Uncategorized' }}</span>
                 <br>
                 <div class="blogpage-img">
-                @if ($blogpost->image)
-            <img src="{{ asset('storage/' . $blogpost->image) }}" alt="{{ $blogpost->title }}">
-        @endif
-        </div><br>
+                    @if ($blogpost->image)
+                        <img src="{{ asset('storage/' . $blogpost->image) }}" alt="{{ $blogpost->title }}">
+                    @endif
+                </div><br>
                 <p class="text-muted">{{ $blogpost->short_description }}</p>
                 <div>{!! $blogpost->content !!}</div>
 
@@ -228,7 +231,7 @@
                         <div class="card-body">
                             <h6 class="card-title">{{ Str::limit($related->title, 50) }}</h6>
                             <a href="{{ route('frontend.show', $related->slug) }}"
-                                class="btn btn-sm btn-outline-primary">Read</a>
+                                class="btn btn-sm btn-outline-primary">Read More</a>
                         </div>
                     </div>
                 @endforeach
@@ -248,7 +251,19 @@
 
     <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+    @if (session('comment_success'))
+        <script>
+            Swal.fire({
+                icon: 'success',
+                title: 'Success!',
+                text: '{{ session('comment_success') }}',
+                confirmButtonText: 'OK'
+            });
+        </script>
+    @endif
+
     <script>
         AOS.init();
 

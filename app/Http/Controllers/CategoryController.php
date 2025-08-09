@@ -5,9 +5,21 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Routing\Controllers\HasMiddleware;
+use Illuminate\Routing\Controllers\Middleware;
 
-class CategoryController extends Controller
+class CategoryController extends Controller implements HasMiddleware
 {
+    public static function middleware(): array
+    {
+        return [
+            new Middleware('permission:view Categories', only: ['index']),
+            new Middleware('permission:create Categories', only: ['create']),
+            new Middleware('permission:edit Categories', only: ['edit']),
+            new Middleware('permission:delete Categories', only: ['delete']),
+            
+        ];
+    }
     public function index()
     {
         $categories = Category::all();

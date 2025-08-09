@@ -4,12 +4,23 @@ namespace App\Http\Controllers;
 
 use App\Models\Comment;
 use App\Models\BlogPost;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Http\Request;
+use Spatie\Permission\Models\Role;
+use Illuminate\Routing\Controllers\HasMiddleware;
+use Illuminate\Routing\Controllers\Middleware;
 use Illuminate\Support\Facades\Validator;
 
-class CommentController extends Controller
-{
+class CommentController extends Controller implements HasMiddleware
+{   
+    public static function middleware(): array
+    {
+        return [
+        // 'permission:View Comments' => ['only' => ['index']),
+        // 'permission:Delete Comments' => ['only' => ['destroy', 'bulkDelete']),
+        new Middleware('permission:View Comments', only: ['index']),
+            new Middleware('permission:Delete Comments', only: ['create']),
+    ];
+    }
     public function index()
     {
         // Show all unapproved and approved comments to admin
@@ -52,7 +63,7 @@ class CommentController extends Controller
             'comment'     => $request->comment,
             'is_active'   => false, // Admin must approve
         ]);
-        return redirect()->back()->with('message', 'Your comment has been submitted and is awaiting approval.');
+        return redirect()->back()->with('comment_success', 'Your comment has been submitted and is awaiting approval.');
     }
 
     public function bulkDelete(Request $request)

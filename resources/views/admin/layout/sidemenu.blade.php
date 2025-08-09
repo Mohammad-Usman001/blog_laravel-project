@@ -6,7 +6,8 @@
                 <img src="{{ asset('assets/images/logo-sm.png') }}" alt="" height="22">
             </span>
             <span class="logo-lg">
-                <img src="{{ asset('assets/images/logo.png') }}" alt="" height="35" width="85" style="filter:invert(1)">
+                <img src="{{ asset('assets/images/logo.png') }}" alt="" height="35" width="85"
+                    style="filter:invert(1)">
             </span>
         </a>
         <a href="index.html" class="logo logo-light">
@@ -14,7 +15,8 @@
                 <img src="{{ asset('assets/images/logo-sm.png') }}" alt="" height="22">
             </span>
             <span class="logo-lg">
-                <img src="{{ asset('assets/images/logo.png') }}" alt="" height="35" width="85" style="filter:invert(1)">
+                <img src="{{ asset('assets/images/logo.png') }}" alt="" height="35" width="85"
+                    style="filter:invert(1)">
             </span>
         </a>
         <button type="button" class="btn btn-sm p-0 fs-3xl header-item float-end btn-vertical-sm-hover"
@@ -31,25 +33,26 @@
             <ul class="navbar-nav" id="navbar-nav">
 
                 <li class="menu-title"><span data-key="t-menu">Admin Dashboard</span></li>
+                {{-- @can('view dashboard') --}}
                 <li class="nav-item">
 
                     <a href="{{ route('admin.dashboard') }}" class="nav-link menu-link"> <i class="ph-gauge"></i> <span
                             data-key="t-dashboards">Dashboard</span> </a>
                 </li>
+                {{-- @endcan --}}
                 {{-- <li class="nav-item">
 
                     <a href="{{route('permissions.index')}}" class="nav-link menu-link"> <i class="ph-gauge"></i>
                         <span data-key="t-herosection">Permissions</span> </a>
                         </li> --}}
-                
-                <li class="nav-item">
+                @can('view Categories')
+                    <li class="nav-item">
 
-                        <a href="{{route("categories.index")}}" class="nav-link menu-link"> <i class="ph-lock-key"></i> <span
-                                data-key="t-chat">Category List</span> </a>
+                        <a href="{{ route('categories.index') }}" class="nav-link menu-link"> <i class="ph-lock-key"></i>
+                            <span data-key="t-chat">Category List</span> </a>
                     </li>
-                
-                
-                    {{-- <li class="nav-item">
+                @endcan
+                {{-- <li class="nav-item">
                         <a class="nav-link menu-link collapsed" href="#sidebarDashboards" data-bs-toggle="collapse"
                             role="button" aria-expanded="false" aria-controls="sidebarDashboards">
                             <i class="ph-gauge"></i> <span data-key="t-dashboards">
@@ -73,37 +76,53 @@
                     </ul>
                 </div>
                 </li> --}}
-                
+
+                @can('View Blog List')
                     <li class="nav-item">
 
-                        <a href="{{route('blogs.index')}}" class="nav-link menu-link"> <i class="ph-chats"></i> <span
+                        <a href="{{ route('blogs.index') }}" class="nav-link menu-link"> <i class="ph-chats"></i> <span
                                 data-key="t-chat">Blog List</span> </a>
                     </li>
-                
-                
+                @endcan
+                @can('View Comments')
                     <li class="nav-item">
-                        <a href="{{ route('admin.comments') }}" class="nav-link menu-link"> <i class="ph-file-text"></i>
+                        <a href="{{ route('admin.comments.index') }}" class="nav-link menu-link"> <i class="ph-file-text"></i>
                             <span data-key="t-chat">Comments</span> </a>
                     </li>
+                @endcan
+                @can('view Likes')
                     <li class="nav-item">
                         <a href="{{ route('admin.likes') }}" class="nav-link menu-link"> <i class="ph ph-thumbs-up"></i>
                             <span data-key="t-chat">Likes</span> </a>
                     </li>
-                
+                @endcan
                 @can('view users')
                     <li class="nav-item">
                         <a href="{{ route('users.index') }}" class="nav-link menu-link"><i class="ph-user"></i>
                             <span data-key="t-chat">Users</span> </a>
                     </li>
                 @endcan
+                @can('view permissions')
+                    <li class="nav-item">
+                        <a href="{{ route('permissions.index') }}" class="nav-link menu-link"><i class="ph ph-lock"></i>
+                            <span data-key="t-chat">Permissions</span> </a>
+                    </li>
+                @endcan
+                @can('view roles')
+                    <li class="nav-item">
+                        <a href="{{ route('roles.index') }}" class="nav-link menu-link"><i class="ph-users"></i>
+                            <span data-key="t-chat">Roles</span> </a>
+                    </li>
+                @endcan
+<hr style="color: white">
                 <li class="nav-item">
                     {{-- <a href="{{ route('logout') }}" class="nav-link menu-link"> <i class="ph-sign-out"></i>
                         <span data-key="t-chat">Logout</span> </a> --}}
-                        <a class="nav-link menu-link" href="{{ route('logout') }}"
-                            onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                            <i class="mdi mdi-logout text-muted fs-lg align-middle me-1"></i>
-                            <span class="align-middle" data-key="t-logout">Logout</span>
-                        </a>
+                    <a class="nav-link menu-link" href="{{ route('logout') }}"
+                        onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                        <i class="mdi mdi-logout text-muted fs-lg align-middle me-1"></i>
+                        <span class="align-middle" data-key="t-logout">Logout</span>
+                    </a>
                 </li>
 
 
