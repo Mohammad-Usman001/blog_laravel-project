@@ -16,6 +16,7 @@ This is a Laravel-based blog web application that includes a complete admin pane
 
 ###  Admin Panel:
 - **Authentication Protected** (login required).
+-  Role-based access control.
 - Manage:
   - **Blog Posts**: Create, edit, delete
   - **Categories**: Create, edit, delete
